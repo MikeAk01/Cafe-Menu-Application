@@ -4,8 +4,8 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
-import com.example.cafemobileapplication.Admin.DysplayAdminHome
-import com.example.cafemobileapplication.Customer.DysplayCustomerHome
+import com.example.cafemobileapplication.Admin.AdminLogin
+import com.example.cafemobileapplication.Customer.DisplayCustomerHome
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -18,13 +18,13 @@ class MainActivity : AppCompatActivity() {
 
         //Start the Customer Home page activity when admin is clicked
         btnCustomer.setOnClickListener{
-            var send = Intent(this, DysplayCustomerHome::class.java)
+            var send = Intent(this, DisplayCustomerHome::class.java)
             startActivity(send)
         }
 
         //Start the Admin Home page activity when admin is clicked
         btnAdmin.setOnClickListener{
-            var send = Intent(this, DysplayAdminHome::class.java)
+            var send = Intent(this, AdminLogin::class.java)
             startActivity(send)
         }
 
