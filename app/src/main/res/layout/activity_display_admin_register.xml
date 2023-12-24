@@ -58,7 +58,8 @@
                 android:layout_marginTop="10dp"
                 android:padding="5dp"
                 android:hint="Email"
-                android:drawableLeft="@drawable/baseline_email_24"/>
+                android:drawableLeft="@drawable/baseline_email_24"
+                android:inputType="textEmailAddress"/>
 
             <EditText
                 android:layout_width="match_parent"
