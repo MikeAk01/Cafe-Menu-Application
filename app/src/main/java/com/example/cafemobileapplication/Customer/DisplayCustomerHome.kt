@@ -9,4 +9,5 @@ class DisplayCustomerHome : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_display_customer_home)
     }
+
 }
