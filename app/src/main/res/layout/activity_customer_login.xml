@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="Customer.CustomerLogin">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/cafe_menu_wallpaper"
+        android:gravity="center"
+        android:orientation="vertical"
+        tools:context=".Customer.CustomerLogin">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="50dp"
+            app:cardCornerRadius="30dp"
+            app:cardElevation="20dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:orientation="vertical"
+                android:padding="24dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/almendra"
+                    android:text="Sign in"
+                    android:textAlignment="center"
+                    android:textColor="#583A00"
+                    android:textSize="30dp"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/Customer_login_Email"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="40dp"
+                    android:drawableLeft="@drawable/baseline_person_pin_24"
+                    android:hint="Email"
+                    android:padding="5dp" />
+
+                <EditText
+                    android:id="@+id/Customer_login_Password"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="10dp"
+                    android:drawableLeft="@drawable/baseline_lock_24"
+                    android:hint="Password"
+                    android:inputType="textPassword"
+                    android:padding="5dp" />
+
+                <Button
+                    android:id="@+id/Customer_login_Button"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="20dp"
+                    android:backgroundTint="#583A00"
+                    android:text="LOG IN"
+                    android:textSize="18dp" />
+
+                <TextView
+                    android:id="@+id/Customer_redirect_register"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center"
+                    android:text="Not a user? Click here to register"
+                    android:textColor="#583A00" />
+
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <Button
+            android:id="@+id/Customer_BM_Button"
+            android:layout_width="208dp"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#583A00"
+            android:text="Back to main page" />
+
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -17,58 +17,58 @@
         app:cardElevation="20dp">
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
+            android:layout_width="328dp"
+            android:layout_height="440dp"
             android:layout_gravity="center_horizontal"
+            android:orientation="vertical"
             android:padding="24dp">
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Sign in"
-                android:textSize="30dp"
-                android:textAlignment="center"
                 android:fontFamily="@font/almendra"
-                android:textStyle="bold"
-                android:textColor="#583A00"/>
+                android:text="Sign in"
+                android:textAlignment="center"
+                android:textColor="#583A00"
+                android:textSize="30dp"
+                android:textStyle="bold" />
 
             <EditText
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
                 android:id="@+id/Admin_login_Email"
+                android:layout_width="292dp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="40dp"
-                android:padding="5dp"
+                android:drawableLeft="@drawable/baseline_person_pin_24"
                 android:hint="Email"
-                android:drawableLeft="@drawable/baseline_person_pin_24"/>
+                android:padding="5dp" />
 
             <EditText
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
                 android:id="@+id/Admin_login_Password"
+                android:layout_width="296dp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:padding="5dp"
-                android:hint="Password"
                 android:drawableLeft="@drawable/baseline_lock_24"
-                android:inputType="textPassword"/>
+                android:hint="Password"
+                android:inputType="textPassword"
+                android:padding="5dp" />
 
             <Button
+                android:id="@+id/Admin_login_Button"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:id="@+id/Admin_login_Button"
-                android:text="LOG IN"
-                android:textSize="18dp"
                 android:layout_marginTop="20dp"
-                android:backgroundTint="#583A00"/>
+                android:backgroundTint="#583A00"
+                android:text="LOG IN"
+                android:textSize="18dp" />
 
             <TextView
+                android:id="@+id/Admin_redirect_register"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/Admin_redirect_register"
                 android:layout_marginTop="10dp"
+                android:gravity="center"
                 android:text="Not a user? Click here to register"
-                android:textColor="#583A00"
-                android:gravity="center"/>
+                android:textColor="#583A00" />
 
 
         </LinearLayout>
