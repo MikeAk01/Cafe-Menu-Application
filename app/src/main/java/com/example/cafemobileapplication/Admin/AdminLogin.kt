@@ -8,6 +8,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
+import com.example.cafemobileapplication.MainActivity
 import com.example.cafemobileapplication.R
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -22,6 +23,7 @@ class AdminLogin : AppCompatActivity() {
     lateinit var login_button: Button
     lateinit var realtimeDB: FirebaseDatabase
     lateinit var referenceDB: DatabaseReference
+    lateinit var backToMain_Button: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,6 +37,12 @@ class AdminLogin : AppCompatActivity() {
         var redirect:TextView = findViewById(R.id.Admin_redirect_register)
         redirect.setOnClickListener{
             var send = Intent(this, AdminRegister::class.java)
+            startActivity(send)
+        }
+        //Crete a return button to the main page
+        backToMain_Button = findViewById(R.id.Admin_BacktoHome_Button)
+        backToMain_Button.setOnClickListener {
+            var send = Intent(this, MainActivity::class.java)
             startActivity(send)
         }
 
@@ -73,9 +81,9 @@ class AdminLogin : AppCompatActivity() {
         //Read the database to check the values
         referenceDB.orderByChild("email").equalTo(email).addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
-                if (snapshot.exists()) {
-                    for (userSnapshot in snapshot.children) {
-                        var admin = userSnapshot.getValue(Admin::class.java)
+
+
+                        var admin = snapshot.getValue(Admin::class.java)
                         // Check if the password matches
                         if (admin != null && admin.password == password) {
                             // Login successful
@@ -83,10 +91,12 @@ class AdminLogin : AppCompatActivity() {
                             var send = Intent(this@AdminLogin, AdminHomePage::class.java)
                             startActivity(send)
                         }
-                    }
-                }
-                else
-                    Toast.makeText(this@AdminLogin, "Login failed: credentials are wrong", Toast.LENGTH_SHORT).show()
+                        else
+                            Toast.makeText(this@AdminLogin, "Login failed: credentials are wrong", Toast.LENGTH_SHORT).show()
+
+
+
+
             }
 
             override fun onCancelled(error: DatabaseError) {
