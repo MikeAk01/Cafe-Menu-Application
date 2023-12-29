@@ -1,5 +1,6 @@
 package com.example.cafemobileapplication.Admin
 
+
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -29,10 +30,6 @@ class AdminLogin : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_display_admin_login)
 
-        //Initialize Firebase Realtime database
-        realtimeDB = FirebaseDatabase.getInstance()
-        //Get a reference for the Admins node
-        referenceDB = realtimeDB.reference.child("Admins")
         //Set the click event to redirect to register page
         var redirect:TextView = findViewById(R.id.Admin_redirect_register)
         redirect.setOnClickListener{
@@ -67,7 +64,36 @@ class AdminLogin : AppCompatActivity() {
                 Toast.makeText(this, "Error: missing fields", Toast.LENGTH_SHORT).show()
             }
             else{
-                signinAdmin(email, password)
+                //Sign user in
+                //Initialize Firebase Realtime database
+                realtimeDB = FirebaseDatabase.getInstance()
+                //Get a reference for the Admins node
+                referenceDB = realtimeDB.getReference("Admins")
+                var dbQuery = referenceDB.orderByChild("email").equalTo(email)
+                //Read the database to check the values
+                dbQuery.addListenerForSingleValueEvent(object : ValueEventListener {
+                    override fun onDataChange(snapshot: DataSnapshot) {
+                        if(snapshot.exists()) {
+                            for(userSnapshot in snapshot.getChildren()) {
+                                val admin= userSnapshot.getValue(Admin::class.java)
+                                if (admin != null) {
+                                    if (admin.password.equals(password)) {
+                                        // Login successful
+                                        Toast.makeText(this@AdminLogin, "Login successfully", Toast.LENGTH_SHORT).show()
+                                        var send = Intent(this@AdminLogin, AdminHomePage::class.java)
+                                        startActivity(send)
+
+                                    } else
+                                        Toast.makeText(this@AdminLogin, "Login failed: credentials are wrong", Toast.LENGTH_SHORT).show()
+                                }
+                            }
+                        }
+                    }
+
+                    override fun onCancelled(error: DatabaseError) {
+                        Toast.makeText(this@AdminLogin, "Registration unsuccessful: ${error.message}", Toast.LENGTH_SHORT).show()
+                    }
+                })
             }
 
         }
@@ -78,31 +104,7 @@ class AdminLogin : AppCompatActivity() {
      * If the values are in the table the user can log in.
      */
     private fun signinAdmin(email: String, password: String) {
-        //Read the database to check the values
-        referenceDB.orderByChild("email").equalTo(email).addListenerForSingleValueEvent(object : ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
 
-
-                        var admin = snapshot.getValue(Admin::class.java)
-                        // Check if the password matches
-                        if (admin != null && admin.password == password) {
-                            // Login successful
-                            Toast.makeText(this@AdminLogin, "Login successfully", Toast.LENGTH_SHORT).show()
-                            var send = Intent(this@AdminLogin, AdminHomePage::class.java)
-                            startActivity(send)
-                        }
-                        else
-                            Toast.makeText(this@AdminLogin, "Login failed: credentials are wrong", Toast.LENGTH_SHORT).show()
-
-
-
-
-            }
-
-            override fun onCancelled(error: DatabaseError) {
-                Toast.makeText(this@AdminLogin, "Registration unsuccessful: ${error.message}", Toast.LENGTH_SHORT).show()
-            }
-        })
     }
 
 
