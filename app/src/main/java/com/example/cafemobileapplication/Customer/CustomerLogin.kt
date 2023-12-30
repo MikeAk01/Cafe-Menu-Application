@@ -18,7 +18,7 @@ class CustomerLogin : AppCompatActivity() {
     lateinit var login_email: EditText
     lateinit var login_password: EditText
     lateinit var login_button: Button
-    lateinit var backMain_Button: Button
+    lateinit var BM_Button: Button
     lateinit var realtimeDB: FirebaseDatabase
     lateinit var referenceDB: DatabaseReference
 
@@ -62,9 +62,15 @@ class CustomerLogin : AppCompatActivity() {
             }
 
         }
-
+        //function to bring customer back to main
+        BackMain()
     }
 
+    private fun BackMain() {
+        BM_Button = findViewById(R.id.Customer_BM_Button)
+
+
+    }
     /**
      * This function is used to check the database for the values in the paramenter.
      * If the values are in the table the user can log in.
