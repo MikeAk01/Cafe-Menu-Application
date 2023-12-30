@@ -7,6 +7,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
+import com.example.cafemobileapplication.MainActivity
 import com.example.cafemobileapplication.R
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -37,6 +38,14 @@ class CustomerLogin : AppCompatActivity() {
             startActivity(send)
 
         }
+        //NEW STUFF HERE
+        //Set the back button to go to the main page
+        backMain_Button = findViewById(R.id.Customer_BM_Button)
+        backMain_Button.setOnClickListener {
+            var send = Intent(this, MainActivity::class.java)
+            startActivity(send)
+        }
+
         //function to log customer in
         customerLogin()
     }

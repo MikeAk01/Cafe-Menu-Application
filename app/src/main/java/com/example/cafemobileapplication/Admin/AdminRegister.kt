@@ -70,19 +70,10 @@ class AdminRegister : AppCompatActivity() {
                     referenceDB.orderByChild("email").equalTo(email).addListenerForSingleValueEvent(object: ValueEventListener {
                         override fun onDataChange(snapshot: DataSnapshot) {
                             if(!snapshot.exists()){
-                                // Creating a HashMap with String keys and Any values
+                                // Creating an instance of admin
                                 val admin = Admin(fName, lName, email, phoneNumber, userName, password, isActive)
-                                val user = HashMap<String, Any?>()
-                                // Adding key-value pairs to the map
-                                user.put("First Name", admin.firstName)
-                                user.put("Last Name", admin.lastName)
-                                user.put("Email", admin.email)
-                                user.put("Phone Number", admin.phoneN)
-                                user.put("Username", admin.userName)
-                                user.put("Password", admin.password)
-                                user.put("Active", admin.isActive)
                                 //Add values to database
-                                referenceDB.push().setValue(user)
+                                referenceDB.push().setValue(admin)
                                 Toast.makeText(this@AdminRegister, "Registration successful", Toast.LENGTH_SHORT).show()
                                 var send = Intent(this@AdminRegister, AdminLogin::class.java)
                                 startActivity(send)
