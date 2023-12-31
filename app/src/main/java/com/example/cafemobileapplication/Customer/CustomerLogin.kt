@@ -40,8 +40,8 @@ class CustomerLogin : AppCompatActivity() {
         }
         //NEW STUFF HERE
         //Set the back button to go to the main page
-        backMain_Button = findViewById(R.id.Customer_BM_Button)
-        backMain_Button.setOnClickListener {
+        BM_Button = findViewById(R.id.Customer_BM_Button)
+        BM_Button.setOnClickListener {
             var send = Intent(this, MainActivity::class.java)
             startActivity(send)
         }
