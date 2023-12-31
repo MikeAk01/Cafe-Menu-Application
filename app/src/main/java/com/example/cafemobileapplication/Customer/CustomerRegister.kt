@@ -70,19 +70,11 @@ class CustomerRegister: AppCompatActivity() {
                     referenceDB.orderByChild("email").equalTo(email).addListenerForSingleValueEvent(object: ValueEventListener {
                         override fun onDataChange(snapshot: DataSnapshot) {
                             if(!snapshot.exists()){
-                                // Creating a HashMap with String keys and Any values
-                                val customer = Customer(fName, lName, email, phoneNumber, userName, password, isActive)
-                                val user = HashMap<String, Any?>()
-                                // Adding key-value pairs to the map
-                                user.put("First Name", customer.firstName)
-                                user.put("Last Name", customer.lastName)
-                                user.put("Email", customer.email)
-                                user.put("Phone Number", customer.phoneN)
-                                user.put("Username", customer.userName)
-                                user.put("Password", customer.password)
-                                user.put("Active", customer.isActive)
+                                // Create instance of customer
+                                val customerID: String? = referenceDB.push().key
+                                val customer = Customer(customerID, fName, lName, email, phoneNumber, userName, password, isActive)
                                 //Add values to database
-                                referenceDB.push().setValue(user)
+                                referenceDB.child(customerID!!).setValue(customer)
                                 Toast.makeText(this@CustomerRegister, "Registration successful", Toast.LENGTH_SHORT).show()
                                 var send = Intent(this@CustomerRegister, CustomerLogin::class.java)
                                 startActivity(send)

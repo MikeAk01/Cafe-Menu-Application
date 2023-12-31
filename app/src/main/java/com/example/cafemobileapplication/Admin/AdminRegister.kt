@@ -71,9 +71,10 @@ class AdminRegister : AppCompatActivity() {
                         override fun onDataChange(snapshot: DataSnapshot) {
                             if(!snapshot.exists()){
                                 // Creating an instance of admin
-                                val admin = Admin(fName, lName, email, phoneNumber, userName, password, isActive)
+                                var adminID: String? = referenceDB.push().key
+                                val admin = Admin(adminID, fName, lName, email, phoneNumber, userName, password, isActive)
                                 //Add values to database
-                                referenceDB.push().setValue(admin)
+                                referenceDB.child(adminID!!).setValue(admin)
                                 Toast.makeText(this@AdminRegister, "Registration successful", Toast.LENGTH_SHORT).show()
                                 var send = Intent(this@AdminRegister, AdminLogin::class.java)
                                 startActivity(send)
