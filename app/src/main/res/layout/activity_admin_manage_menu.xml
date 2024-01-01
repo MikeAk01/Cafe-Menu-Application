@@ -4,6 +4,32 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/wallpaper2"
     tools:context=".Admin.AdminManageMenu">
+
+    <TextView
+        android:id="@+id/admin_menu_list_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/almendra"
+        android:text="MENU LIST"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="50dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/admin_recyclerView"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/admin_recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="vertical"
+        android:layout_marginTop="70dp"
+        tools:listitem="@layout/product_list_layout" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
