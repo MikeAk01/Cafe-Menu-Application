@@ -1,10 +1,10 @@
 package com.example.cafemobileapplication.Admin
 
-import android.app.Activity
 import android.app.AlertDialog
 import android.content.ContentResolver
 import android.content.Intent
 import android.net.Uri
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.webkit.MimeTypeMap
 import android.widget.Button
@@ -13,9 +13,7 @@ import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
-import androidx.activity.result.ActivityResultLauncher
-import androidx.activity.result.contract.ActivityResultContracts
-import androidx.appcompat.app.AppCompatActivity
+import com.bumptech.glide.Glide
 import com.example.cafemobileapplication.Classes.Product
 import com.example.cafemobileapplication.R
 import com.google.firebase.database.DatabaseReference
@@ -23,30 +21,35 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 
-
-class AdminAddItem : AppCompatActivity() {
-    //Declare variables
-    lateinit var product_image: ImageView
-    lateinit var product_name: EditText
-    lateinit var product_price: EditText
-    lateinit var product_available: CheckBox
+class AdminEditItem : AppCompatActivity() {
+    //Declare variable
+    lateinit var edit_image: ImageView
+    lateinit var edit_name: EditText
+    lateinit var edit_price: EditText
+    lateinit var edit_available: CheckBox
     lateinit var redirect: TextView
-    lateinit var upload_button: Button
-    lateinit var product_image_url: String
+    lateinit var edit_button: Button
+    lateinit var delete_button: Button
+    lateinit var image_url: String
+    lateinit var old_image_url: String
+    lateinit var prodID: String
     lateinit var referenceDB: DatabaseReference
     lateinit var storageDB: StorageReference
     var imageUri: Uri? = null
-    lateinit var activityResultLauncher: ActivityResultLauncher<Intent>
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_admin_add_item)
+        setContentView(R.layout.activity_admin_edit_item)
 
         //Get the widgets
-        product_image = findViewById(R.id.admin_product_image)
-        upload_button = findViewById(R.id.admin_upload_button)
+        edit_button = findViewById(R.id.admin_edit_prod_button)
+        delete_button = findViewById(R.id.admin_delete_prod_button)
+        edit_image = findViewById(R.id.admin_edit_prod_image)
+        edit_name = findViewById(R.id.admin_edit_prod_name)
+        edit_price = findViewById(R.id.admin_edit_prod_price)
+        edit_available = findViewById(R.id.admin_edit_prod_available)
 
         //Listener for the textview to go back
-        redirect = findViewById(R.id.admin_upload_goBack)
+        redirect = findViewById(R.id.admin_edit_goBack)
         redirect.setOnClickListener{
             var send = Intent(this, AdminManageMenu::class.java)
             startActivity(send)
@@ -57,30 +60,51 @@ class AdminAddItem : AppCompatActivity() {
         //Get reference of firebase storage
         storageDB = FirebaseStorage.getInstance().getReference()
 
-        //Upload image event listener
-        product_image.setOnClickListener{
+        //Edit image event listener
+        edit_image.setOnClickListener{
             val galleryIntent = Intent()
             galleryIntent.setAction(Intent.ACTION_GET_CONTENT)
             galleryIntent.setType("image/*")
             startActivityForResult(galleryIntent, 2)
         }
 
-        //Upload button event listener
-        upload_button.setOnClickListener{
+        //Get the extra data from the intent
+        val bundle: Bundle? = intent.extras
+        if(bundle != null){
+            Glide.with(this@AdminEditItem).load(bundle.getString("productImageURL")).into(edit_image)
+            edit_name.setText(bundle.getString("productName"))
+            edit_price.setText(bundle.getString("productPrice"))
+            edit_available.isChecked
+            prodID = bundle.getString("prodID").toString()
+            old_image_url = bundle.getString("productImageURL").toString()
+
+        }
+
+        //Edit button event listener
+        edit_button.setOnClickListener{
             if(imageUri != null){
-                uploadToFirebase(imageUri!!)
+                updateFirebase(imageUri!!)
             }
             else{
-                Toast.makeText(this@AdminAddItem, "Error: upload image", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@AdminEditItem, "Error: upload image", Toast.LENGTH_SHORT).show()
             }
         }
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if(requestCode == 2 && resultCode == RESULT_OK && data != null){
+            imageUri = data.data!!
+            edit_image.setImageURI(imageUri)
+        }
+    }
+
     /**
-     * This function uploads the input data to firebase
+     * This function uploads the input data to firebase storage
      */
-    private fun uploadToFirebase(uri: Uri) {
-        val builder = AlertDialog.Builder(this@AdminAddItem)
+    private fun updateFirebase(uri: Uri) {
+        val builder = AlertDialog.Builder(this@AdminEditItem)
         builder.setCancelable(false)
         builder.setView(R.layout.progress_bar_layout)
         val dialog = builder.create()
@@ -89,14 +113,14 @@ class AdminAddItem : AppCompatActivity() {
             // Upon successful upload
             fileReference.downloadUrl.addOnSuccessListener { uri ->
                 dialog.dismiss()
-                addToDatabase(uri)
+                updateDatabase(uri)
             }
         }.addOnProgressListener { e ->
             dialog.show()
         }.addOnFailureListener { e ->
             // Upon upload failure
             dialog.dismiss()
-            Toast.makeText(this@AdminAddItem, "Error: upload unsuccessful", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this@AdminEditItem, "Error: upload unsuccessful", Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -106,27 +130,14 @@ class AdminAddItem : AppCompatActivity() {
         return mime.getExtensionFromMimeType(cr.getType(mUri))
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-
-        if(requestCode == 2 && resultCode == RESULT_OK && data != null){
-            imageUri = data.data!!
-            product_image.setImageURI(imageUri)
-        }
-    }
-
-    fun addToDatabase(uri: Uri) {
-        //Get widgets
-        product_name = findViewById(R.id.admin_product_name)
-        product_price = findViewById(R.id.admin_product_price)
-        product_available = findViewById(R.id.admin_product_available)
-        val name = product_name.text.toString()
-        val price = product_price.text.toString()
-        val available = product_available.isChecked
+    fun updateDatabase(uri: Uri) {
+        val name = edit_name.text.toString()
+        val price = edit_price.text.toString()
+        val available = edit_available.isChecked
 
         //Handle missing fields
         if(name.isEmpty() || price.isEmpty() || available == false) {
-            Toast.makeText(this@AdminAddItem, "Error: missing fields", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this@AdminEditItem, "Error: missing fields", Toast.LENGTH_SHORT).show()
             //Handle exception if price field is missing
             prodPrice(price)
         }
@@ -134,15 +145,18 @@ class AdminAddItem : AppCompatActivity() {
             //Turn number from string to Double
             var prodPrice:Double = price.toDouble()
             //Create the image url using uri
-            product_image_url = uri.toString()
+            image_url = uri.toString()
             //Create instance of Product
-            var prodID: String? = referenceDB.push().key
-            val product = Product(prodID, name, prodPrice, product_image_url, available)
+            val product = Product(prodID, name, prodPrice, image_url, available)
             //Add product to database
             referenceDB.child(prodID!!).setValue(product)
-            Toast.makeText(this@AdminAddItem, "Upload successful", Toast.LENGTH_SHORT).show()
-                var send = Intent(this, AdminHomePage::class.java)
-                startActivity(send)
+            Toast.makeText(this@AdminEditItem, "Upload successful", Toast.LENGTH_SHORT).show()
+            //Delete old url in firebase storage
+            val storageDB2 = FirebaseStorage.getInstance().getReferenceFromUrl(old_image_url)
+            storageDB2.delete()
+            //Start new activity
+            var send = Intent(this, AdminManageMenu::class.java)
+            startActivity(send)
         }
     }
 
@@ -154,7 +168,7 @@ class AdminAddItem : AppCompatActivity() {
         try {
             priceNumber = price.toDouble()
         } catch (e: NumberFormatException) {
-            Toast.makeText(this@AdminAddItem, "Error: ${e.message}", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this@AdminEditItem, "Error: ${e.message}", Toast.LENGTH_SHORT).show()
         }
     }
 
