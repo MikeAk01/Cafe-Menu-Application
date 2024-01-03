@@ -4,6 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".customer_notification">
-
+    android:background="@drawable/cafe_menu_wallpaper"
+    tools:context=".Customer.CustomerNotification">
 </androidx.constraintlayout.widget.ConstraintLayout>

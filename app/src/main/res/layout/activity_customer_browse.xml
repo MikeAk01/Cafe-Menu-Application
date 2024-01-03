@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Customer_Browse">
+    android:background="@drawable/cafe_menu_wallpaper"
+    tools:context=".Customer.CustomerBrowse">
 
 </androidx.constraintlayout.widget.ConstraintLayout>
