@@ -24,6 +24,8 @@ class AdminManageMenu : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_admin_manage_menu)
 
+
+
         //Get the widget
         recyclerView = findViewById(R.id.admin_recyclerView)
         //Initialize Database reference
