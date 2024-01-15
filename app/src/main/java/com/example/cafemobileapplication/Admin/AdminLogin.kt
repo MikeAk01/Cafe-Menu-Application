@@ -26,6 +26,7 @@ class AdminLogin : AppCompatActivity() {
     lateinit var referenceDB: DatabaseReference
     lateinit var backToMain_Button: Button
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_display_admin_login)
@@ -86,6 +87,8 @@ class AdminLogin : AppCompatActivity() {
                                     } else
                                         Toast.makeText(this@AdminLogin, "Login failed: credentials are wrong", Toast.LENGTH_SHORT).show()
                                 }
+                                else
+                                    Toast.makeText(this@AdminLogin, "Login failed: user don't exist", Toast.LENGTH_SHORT).show()
                             }
                         }
                     }

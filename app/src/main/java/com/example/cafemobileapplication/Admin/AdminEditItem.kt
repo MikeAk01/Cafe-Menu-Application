@@ -36,6 +36,7 @@ class AdminEditItem : AppCompatActivity() {
     lateinit var referenceDB: DatabaseReference
     lateinit var storageDB: StorageReference
     var imageUri: Uri? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_admin_edit_item)
@@ -86,7 +87,18 @@ class AdminEditItem : AppCompatActivity() {
                 updateFirebase(imageUri!!)
             }
             else{
-                Toast.makeText(this@AdminEditItem, "Error: upload image", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@AdminEditItem, "Change the image", Toast.LENGTH_SHORT).show()
+            }
+        }
+
+        //Delete button event listener
+        delete_button.setOnClickListener{
+            var fileReference: StorageReference = FirebaseStorage.getInstance().getReferenceFromUrl(old_image_url)
+            fileReference.delete().addOnSuccessListener{
+                referenceDB.child(prodID).removeValue()
+                Toast.makeText(this@AdminEditItem, "Product delete successfully", Toast.LENGTH_SHORT).show()
+                var send = Intent(this, AdminManageMenu::class.java)
+                startActivity(send)
             }
         }
     }

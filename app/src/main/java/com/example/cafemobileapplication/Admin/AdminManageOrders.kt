@@ -9,4 +9,5 @@ class AdminManageOrders : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_admin_manage_orders)
     }
+
 }

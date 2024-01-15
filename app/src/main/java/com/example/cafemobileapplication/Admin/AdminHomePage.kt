@@ -43,6 +43,7 @@ class AdminHomePage : AppCompatActivity() {
             var send = Intent(this, AdminAddItem::class.java)
             startActivity(send)
         }
+
         //Send updates
         c_send_updates = findViewById(R.id.admin_send_updates_card)
         c_send_updates.setOnClickListener{

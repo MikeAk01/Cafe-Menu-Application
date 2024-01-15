@@ -9,4 +9,5 @@ data class Product(
 
     //No argument constructor
     constructor() : this("", "",0.00,"", false)
+
 }
