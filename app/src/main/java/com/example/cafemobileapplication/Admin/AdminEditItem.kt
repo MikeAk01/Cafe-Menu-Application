@@ -91,15 +91,38 @@ class AdminEditItem : AppCompatActivity() {
             }
         }
 
-        //Delete button event listener
-        delete_button.setOnClickListener{
-            var fileReference: StorageReference = FirebaseStorage.getInstance().getReferenceFromUrl(old_image_url)
-            fileReference.delete().addOnSuccessListener{
-                referenceDB.child(prodID).removeValue()
-                Toast.makeText(this@AdminEditItem, "Product delete successfully", Toast.LENGTH_SHORT).show()
-                var send = Intent(this, AdminManageMenu::class.java)
-                startActivity(send)
-            }
+        // Delete button event listener
+        delete_button.setOnClickListener {
+            showDeleteConfirmationDialog()
+        }
+    }
+
+    /**
+     * Function to show the delete confirmation dialog
+     */
+    private fun showDeleteConfirmationDialog() {
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle("Delete Confirmation")
+            .setMessage("Are you sure you want to delete this item?")
+            .setPositiveButton("Yes") { dialog, which -> deleteItem() }
+                .setNegativeButton("No") { dialog, which ->
+                // User clicked No, do nothing
+                }.show()
+    }
+
+    /**
+     * Function to handle item deletion
+     */
+    private fun deleteItem() {
+        val fileReference: StorageReference = FirebaseStorage.getInstance().getReferenceFromUrl(old_image_url)
+
+        fileReference.delete().addOnSuccessListener {
+            referenceDB.child(prodID).removeValue()
+            Toast.makeText(this@AdminEditItem, "Product deleted successfully", Toast.LENGTH_SHORT).show()
+
+            // Navigate back to AdminManageMenu
+            val send = Intent(this, AdminManageMenu::class.java)
+            startActivity(send)
         }
     }
 
@@ -142,6 +165,9 @@ class AdminEditItem : AppCompatActivity() {
         return mime.getExtensionFromMimeType(cr.getType(mUri))
     }
 
+    /**
+     * Function to update the database
+     */
     fun updateDatabase(uri: Uri) {
         val name = edit_name.text.toString()
         val price = edit_price.text.toString()
