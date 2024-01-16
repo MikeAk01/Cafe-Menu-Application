@@ -22,6 +22,7 @@ class AdminRegister : AppCompatActivity() {
     lateinit var referenceDB: DatabaseReference
     lateinit var binding:  ActivityDisplayAdminRegisterBinding
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         //Initialize Firebase Realtime database

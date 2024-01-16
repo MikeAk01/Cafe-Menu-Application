@@ -48,9 +48,10 @@ class AdminAddItem : AppCompatActivity() {
         //Listener for the textview to go back
         redirect = findViewById(R.id.admin_upload_goBack)
         redirect.setOnClickListener{
-            var send = Intent(this, AdminManageMenu::class.java)
+            var send = Intent(this, AdminHomePage::class.java)
             startActivity(send)
         }
+
 
         //Get reference of firebase  database
         referenceDB = FirebaseDatabase.getInstance().getReference("Products")

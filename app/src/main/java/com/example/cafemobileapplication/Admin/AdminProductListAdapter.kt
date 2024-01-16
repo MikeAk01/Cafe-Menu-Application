@@ -26,6 +26,7 @@ class AdminProductListAdapter : RecyclerView.Adapter<AdminProductListAdapter.MyV
         this.list = list
     }
 
+
     //Methods
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         var v: View = LayoutInflater.from(context).inflate(R.layout.product_list_layout, parent, false)

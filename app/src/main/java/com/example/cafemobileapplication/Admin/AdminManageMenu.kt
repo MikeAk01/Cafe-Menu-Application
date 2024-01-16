@@ -1,5 +1,6 @@
 package com.example.cafemobileapplication.Admin
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -8,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.cafemobileapplication.Classes.Product
 import com.example.cafemobileapplication.R
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
@@ -20,9 +22,17 @@ class AdminManageMenu : AppCompatActivity() {
     lateinit var list: ArrayList<Product>
     lateinit var referenceDB: DatabaseReference
     lateinit var adapter: AdminProductListAdapter
+    @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_admin_manage_menu)
+
+        //Create a support action bar to turn back to the admin home page
+        var floating_back: FloatingActionButton = findViewById(R.id.floatingBackButton)
+        floating_back.setOnClickListener{
+            var send = Intent(this, AdminHomePage::class.java)
+            startActivity(send)
+        }
 
         //Get the widget
         recyclerView = findViewById(R.id.admin_recyclerView)

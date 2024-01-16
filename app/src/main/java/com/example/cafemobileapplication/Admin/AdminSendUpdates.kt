@@ -9,4 +9,5 @@ class AdminSendUpdates : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_admin_send_updates)
     }
+
 }
