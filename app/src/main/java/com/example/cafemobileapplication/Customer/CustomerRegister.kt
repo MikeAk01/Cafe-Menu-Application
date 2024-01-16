@@ -9,7 +9,6 @@ import android.util.Patterns
 import android.widget.Toast
 import com.example.cafemobileapplication.R
 import com.example.cafemobileapplication.databinding.ActivityCustomerRegisterBinding
-import com.example.cafemobileapplication.databinding.ActivityDisplayCustomerHomeBinding
 import com.google.firebase.crashlytics.buildtools.reloc.org.apache.commons.codec.digest.DigestUtils
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError

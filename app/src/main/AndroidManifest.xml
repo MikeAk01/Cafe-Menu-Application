@@ -15,6 +15,9 @@
         android:theme="@style/Theme.CafeMobileApplication"
         tools:targetApi="31">
         <activity
+            android:name=".Admin.AdminOrderListAdapter"
+            android:exported="false" />
+        <activity
             android:name=".Admin.AdminEditItem"
             android:exported="false" />
         <activity
@@ -49,7 +52,7 @@
             android:exported="false" />
         <activity
             android:name=".Admin.AdminManageMenu"
-            android:exported="false"/>
+            android:exported="false" />
         <activity
             android:name=".Customer.CustomerLogin"
             android:exported="false" />

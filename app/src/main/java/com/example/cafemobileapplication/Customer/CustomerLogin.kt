@@ -101,7 +101,7 @@ class CustomerLogin : AppCompatActivity() {
                                     Toast.LENGTH_SHORT
                                 ).show()
                                 var send =
-                                    Intent(this@CustomerLogin, DisplayCustomerHome::class.java)
+                                    Intent(this@CustomerLogin, CustomerHomePage::class.java)
                                 startActivity(send)
                             }
                         }
