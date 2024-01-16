@@ -28,6 +28,7 @@ class CustomerAddItem : AppCompatActivity() {
     lateinit var referenceDB: DatabaseReference
     /* lateinit var storageDB: StorageReference
     */
+
     var imageUri: Uri? = null
 
     lateinit var activityResultLauncher: ActivityResultLauncher<Intent>
