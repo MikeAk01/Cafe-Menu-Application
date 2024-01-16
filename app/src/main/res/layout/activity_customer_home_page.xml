@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@drawable/customer_coffee"
-    tools:context=".Customer.DisplayCustomerHome">
+    tools:context=".Customer.CustomerHomePage">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -136,7 +136,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/admin_add_item_txt"
-            android:text="Add item"
+            android:text="Browse Menu"
             android:textSize="20sp"
             android:textStyle="bold"
             android:layout_marginTop="10dp"
@@ -244,16 +244,18 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <TextView
+
+            <Button
+
+                android:id="@+id/Customer_Logout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/Customer_logout_txt"
-                android:text="Logout"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                android:layout_marginTop="10dp"
+                android:layout_below="@+id/Customer_logout_image"
                 android:layout_centerHorizontal="true"
-                android:layout_below="@+id/Customer_logout_image"/>
+                android:text="Logout"
+                android:background="@drawable/cbutton_logout"
+                android:textSize="18dp"
+                android:textStyle="bold" />
 
             <ImageView
                 android:layout_width="70dp"
