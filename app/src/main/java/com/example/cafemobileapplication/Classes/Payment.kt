@@ -9,7 +9,7 @@ import java.time.LocalDateTime
 data class Payment(
     var paymentID: String?,
     //Reference to the Order class
-    var orderID: Order?,
+    var orderID: String?,
     var paymentType: String,
     var amount: Double,
     var paymentDate: LocalDateTime?){

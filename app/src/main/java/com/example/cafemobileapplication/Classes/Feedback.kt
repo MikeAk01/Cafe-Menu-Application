@@ -9,7 +9,7 @@ import com.example.cafemobileapplication.Customer.Customer
 data class Feedback(
     var feedbackID: String?,
     //Reference to the Customer class
-    var customerID: Customer?,
+    var customerID: String?,
     var message: String?,
     var rating: Int){
 

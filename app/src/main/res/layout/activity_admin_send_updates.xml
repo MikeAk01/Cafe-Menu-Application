@@ -38,21 +38,12 @@
                     android:textStyle="bold" />
 
                 <EditText
-                    android:id="@+id/admin_sendUpdate_customerN"
+                    android:id="@+id/admin_sendUpdate_customerEmail"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
                     android:layout_marginTop="10dp"
                     android:drawableLeft="@drawable/baseline_person_24_version2"
-                    android:hint="Customer first name"
-                    android:padding="5dp" />
-
-                <EditText
-                    android:id="@+id/admin_sendUpdate_customerL"
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:layout_marginTop="10dp"
-                    android:drawableLeft="@drawable/baseline_person_24_version2"
-                    android:hint="Customer last name"
+                    android:hint="Customer email"
                     android:padding="5dp" />
 
                 <EditText

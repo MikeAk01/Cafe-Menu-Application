@@ -27,12 +27,12 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Customer Name: "
+                android:text="Customer Email: "
                 android:textSize="22dp"
                 android:textStyle="bold"/>
 
             <TextView
-                android:id="@+id/admin_orderCustomerName"
+                android:id="@+id/admin_orderCustomerEmail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="20dp" />
@@ -48,12 +48,12 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Order Price: "
+                android:text="Order Amount: "
                 android:textSize="22dp"
                 android:textStyle="bold"/>
 
             <TextView
-                android:id="@+id/admin_orderOrderPrice"
+                android:id="@+id/admin_orderOrderAmount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="20dp"/>

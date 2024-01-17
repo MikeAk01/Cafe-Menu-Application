@@ -53,6 +53,7 @@ class AdminAddItem : AppCompatActivity() {
         }
 
 
+
         //Get reference of firebase  database
         referenceDB = FirebaseDatabase.getInstance().getReference("Products")
         //Get reference of firebase storage

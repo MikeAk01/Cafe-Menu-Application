@@ -7,9 +7,9 @@ package com.example.cafemobileapplication.Classes
 data class OrderDetails(
     var orderDetailID: String?,
     //Reference to the Order class
-    var orderID: Order?,
+    var orderID: String?,
     //Reference to the Product class
-    var prodID: Product?){
+    var prodID: String?){
 
     //No argument constructor
     constructor() : this("", null,null)
