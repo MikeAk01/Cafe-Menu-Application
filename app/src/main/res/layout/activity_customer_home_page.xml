@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@drawable/customer_coffee"
+    android:background="@drawable/cafe_menu_wallpaper"
     tools:context=".Customer.CustomerHomePage">
 
     <androidx.constraintlayout.widget.ConstraintLayout

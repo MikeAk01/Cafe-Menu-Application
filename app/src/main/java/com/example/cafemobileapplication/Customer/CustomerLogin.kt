@@ -40,7 +40,7 @@ class CustomerLogin : AppCompatActivity() {
         }
         //NEW STUFF HERE
         //Set the back button to go to the main page
-        BM_Button = findViewById(R.id.Customer_BM_Button)
+        BM_Button = findViewById(R.id.Customer_BacktoHome_Button)
         BM_Button.setOnClickListener {
             var send = Intent(this, MainActivity::class.java)
             startActivity(send)
@@ -76,7 +76,7 @@ class CustomerLogin : AppCompatActivity() {
     }
 
     private fun BackMain() {
-        BM_Button = findViewById(R.id.Customer_BM_Button)
+        BM_Button = findViewById(R.id.Customer_BacktoHome_Button)
 
 
     }
@@ -91,9 +91,9 @@ class CustomerLogin : AppCompatActivity() {
                 override fun onDataChange(snapshot: DataSnapshot) {
                     if (snapshot.exists()) {
                         for (userSnapshot in snapshot.children) {
-                            var admin = userSnapshot.getValue(Customer::class.java)
+                            var customer = userSnapshot.getValue(Customer::class.java)
                             // Check if the password matches
-                            if (admin != null && admin.password == password) {
+                            if (customer != null && customer.password == password) {
                                 // Login successful
                                 Toast.makeText(
                                     this@CustomerLogin,
