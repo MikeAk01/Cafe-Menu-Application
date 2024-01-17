@@ -36,7 +36,7 @@ class CustomerHomePage : AppCompatActivity() {
         }
 
         //add item
-        c_add_items = findViewById(R.id.Customer_add_item_card)
+        c_add_items = findViewById(R.id.Customer_add_card)
         c_add_items.setOnClickListener {
             var send = Intent(this, CustomerAddItem::class.java)
             startActivity(send)
