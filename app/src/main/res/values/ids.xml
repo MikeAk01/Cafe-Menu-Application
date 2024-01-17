@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <item name="customer_add_card" type="id" />
-    <item name="Customer_add_item_txt" type="id">customer add item</item>
 </resources>
