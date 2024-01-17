@@ -21,22 +21,22 @@
             android:name=".Admin.AdminEditItem"
             android:exported="false" />
         <activity
-            android:name=".customer_notification"
+            android:name=".Customer.CustomerNotification"
             android:exported="false" />
         <activity
-            android:name=".customer_modify"
+            android:name=".Customer.CustomerModify"
             android:exported="false" />
         <activity
-            android:name=".customer_feedback"
+            android:name=".Customer.CustomerFeedback"
             android:exported="false" />
         <activity
-            android:name=".CustomerConfirmation"
+            android:name=".Customer.CustomerConfirmation"
             android:exported="false" />
         <activity
-            android:name=".Customer_Browse"
+            android:name=".Customer.CustomerBrowse"
             android:exported="false" />
         <activity
-            android:name=".Customer_add_items"
+            android:name=".Customer.CustomerAddItem"
             android:exported="false" />
         <activity
             android:name=".Admin.AdminReviewFeedback"
@@ -60,7 +60,7 @@
             android:name=".Customer.CustomerRegister"
             android:exported="false" />
         <activity
-            android:name=".Customer.DisplayCustomerHome"
+            android:name=".Customer.CustomerHomePage"
             android:exported="false" />
         <activity
             android:name=".Admin.AdminHomePage"
