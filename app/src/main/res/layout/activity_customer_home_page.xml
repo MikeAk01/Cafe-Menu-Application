@@ -24,7 +24,7 @@
             android:text="Customer"
             android:textAlignment="center"
             android:textColor="@color/white"
-            android:textSize="73dp"
+            android:textSize="73sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
