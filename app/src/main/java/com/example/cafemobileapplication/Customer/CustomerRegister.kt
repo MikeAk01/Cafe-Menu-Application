@@ -9,7 +9,6 @@ import android.util.Patterns
 import android.widget.Toast
 import com.example.cafemobileapplication.R
 import com.example.cafemobileapplication.databinding.ActivityCustomerRegisterBinding
-import com.example.cafemobileapplication.databinding.ActivityCustomerHomePageBinding
 import com.google.firebase.crashlytics.buildtools.reloc.org.apache.commons.codec.digest.DigestUtils
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -23,21 +22,21 @@ class CustomerRegister: AppCompatActivity() {
     lateinit var referenceDB: DatabaseReference
     lateinit var binding: ActivityCustomerRegisterBinding
 
-    override fun onCreate(savedInstanceState: Bundle?) {
+     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        //Initialize Firebase Realtime database
+        // Initialize Firebase Realtime database
         realtimeDB = FirebaseDatabase.getInstance()
         referenceDB = realtimeDB.reference.child("Customer")
-        //Initialize binding
+        // Initialize binding
         binding = ActivityCustomerRegisterBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        //Set the click event to redirect to login page
+        // Set the click event to redirect to login page
         binding.CustomerRedirectLogin.setOnClickListener{
             var send = Intent(this, CustomerLogin::class.java)
             startActivity(send)
         }
-        //Function to register an Customer
+        // Function to register a Customer
         customerRegister()
     }
 

@@ -8,12 +8,13 @@ import java.time.LocalDateTime
  */
 data class Payment(
     var paymentID: String?,
-    var orderID: String?,
+    //Reference to the Order class
+    var orderID: Order?,
     var paymentType: String,
     var amount: Double,
     var paymentDate: LocalDateTime?){
 
     //No argument constructor
-    constructor() : this("", "","", 0.00, null)
+    constructor() : this("", null,"", 0.00, null)
 
 }

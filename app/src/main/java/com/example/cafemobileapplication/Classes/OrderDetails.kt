@@ -6,10 +6,12 @@ package com.example.cafemobileapplication.Classes
  */
 data class OrderDetails(
     var orderDetailID: String?,
-    var orderID: String?,
-    var prodID: String?){
+    //Reference to the Order class
+    var orderID: Order?,
+    //Reference to the Product class
+    var prodID: Product?){
 
     //No argument constructor
-    constructor() : this("", "","")
+    constructor() : this("", null,null)
 
 }
