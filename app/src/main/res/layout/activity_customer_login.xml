@@ -1,91 +1,86 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:background="@drawable/cafe_menu_wallpaper"
     tools:context="Customer.CustomerLogin">
 
-    <LinearLayout
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/cafe_menu_wallpaper"
-        android:gravity="center"
-        android:orientation="vertical"
-        tools:context=".Customer.CustomerLogin">
+        android:layout_height="wrap_content"
+        android:layout_margin="50dp"
+        app:cardCornerRadius="30dp"
+        app:cardElevation="20dp">
 
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
+        <LinearLayout
+            android:layout_width="328dp"
             android:layout_height="wrap_content"
-            android:layout_margin="50dp"
-            app:cardCornerRadius="30dp"
-            app:cardElevation="20dp">
+            android:layout_gravity="center_horizontal"
+            android:orientation="vertical"
+            android:padding="24dp">
 
-            <LinearLayout
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:orientation="vertical"
-                android:padding="24dp">
+                android:fontFamily="@font/almendra"
+                android:text="Sign in"
+                android:textAlignment="center"
+                android:textColor="#583A00"
+                android:textSize="30dp"
+                android:textStyle="bold" />
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/almendra"
-                    android:text="Sign in"
-                    android:textAlignment="center"
-                    android:textColor="#583A00"
-                    android:textSize="30dp"
-                    android:textStyle="bold" />
+            <EditText
+                android:id="@+id/Customer_login_Email"
+                android:layout_width="292dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:drawableLeft="@drawable/baseline_person_pin_24"
+                android:hint="Email"
+                android:padding="15dp"
+                android:textSize="20dp"/>
 
-                <EditText
-                    android:id="@+id/Customer_login_Email"
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:layout_marginTop="40dp"
-                    android:drawableLeft="@drawable/baseline_person_pin_24"
-                    android:hint="Email"
-                    android:padding="5dp" />
+            <EditText
+                android:id="@+id/Customer_login_Password"
+                android:layout_width="296dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:drawableLeft="@drawable/baseline_lock_24"
+                android:hint="Password"
+                android:inputType="textPassword"
+                android:padding="16dp"
+                android:textSize="20dp"/>
 
-                <EditText
-                    android:id="@+id/Customer_login_Password"
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:layout_marginTop="10dp"
-                    android:drawableLeft="@drawable/baseline_lock_24"
-                    android:hint="Password"
-                    android:inputType="textPassword"
-                    android:padding="5dp" />
+            <Button
+                android:id="@+id/Customer_login_Button"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="20dp"
+                android:backgroundTint="#583A00"
+                android:text="LOG IN"
+                android:textSize="18dp" />
 
-                <Button
-                    android:id="@+id/Customer_login_Button"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:layout_marginTop="20dp"
-                    android:backgroundTint="#583A00"
-                    android:text="LOG IN"
-                    android:textSize="18dp" />
+            <TextView
+                android:id="@+id/Customer_redirect_register"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:text="Not a user? Click here to register"
+                android:textColor="#583A00" />
 
-                <TextView
-                    android:id="@+id/Customer_redirect_register"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:gravity="center"
-                    android:text="Not a user? Click here to register"
-                    android:textColor="#583A00" />
+        </LinearLayout>
 
+    </androidx.cardview.widget.CardView>
 
-            </LinearLayout>
+    <Button
+        android:id="@+id/Customer_BacktoHome_Button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#583A00"
+        android:text="Back to main page" />
 
-        </androidx.cardview.widget.CardView>
-
-        <Button
-            android:id="@+id/Customer_BM_Button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:backgroundTint="#583A00"
-            android:text="Back to main page" />
-
-    </LinearLayout>
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>
