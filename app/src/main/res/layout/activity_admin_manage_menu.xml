@@ -8,7 +8,6 @@
     tools:context=".Admin.AdminManageMenu">
 
 
-
     <TextView
         android:id="@+id/admin_menu_list_text"
         android:layout_width="match_parent"
@@ -20,18 +19,23 @@
         android:textColor="@color/white"
         android:textSize="50dp"
         android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/admin_recyclerView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/admin_recyclerView"/>
+        app:layout_constraintTop_toTopOf="parent" />
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/admin_recyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginTop="100dp"
         android:scrollbars="vertical"
-        android:layout_marginTop="70dp"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        app:spanCount="2"
         tools:listitem="@layout/product_list_layout" />
+
+
 
     <!-- Floating back button -->
     <com.google.android.material.floatingactionbutton.FloatingActionButton
