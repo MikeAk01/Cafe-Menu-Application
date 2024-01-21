@@ -9,7 +9,6 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
-import com.example.cafemobileapplication.Classes.Product
 import com.example.cafemobileapplication.Classes.Update
 import com.example.cafemobileapplication.Customer.Customer
 import com.example.cafemobileapplication.R
@@ -69,7 +68,7 @@ class AdminSendUpdates : AppCompatActivity() {
 
         //Check if there are missing inputs
         if(TextUtils.isEmpty(customerEmail) || TextUtils.isEmpty(message)){
-            Toast.makeText(this, "Error: missing fields", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this@AdminSendUpdates, "Error: missing fields", Toast.LENGTH_SHORT).show()
         }
         else{
             handleDB(customerEmail, message)
@@ -83,26 +82,29 @@ class AdminSendUpdates : AppCompatActivity() {
         //Read the database to check the values
         referenceDBCustomer.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
+                var customerExists = true
                 if(snapshot.exists()) {
                     for(userSnapshot in snapshot.getChildren()) {
                         val customer = userSnapshot.getValue(Customer::class.java)
-                        if (customer != null) {
-                            if (customer.email.equals(customerEmail)) {
-                                //Create instance of Update
-                                var customerID: String? = customer.customerID
-                                val update = Update(customerID, customerEmail, message)
-                                //Add update to database
-                                referenceDBUpdate.push().setValue(update)
-                                //Message sent successfully
-                                Toast.makeText(this@AdminSendUpdates, "Message sent successfully", Toast.LENGTH_SHORT).show()
-                                var send = Intent(this@AdminSendUpdates, AdminHomePage::class.java)
-                                startActivity(send)
-
-                            } else
-                                Toast.makeText(this@AdminSendUpdates, "The customer you are trying to send an update to do not exist!", Toast.LENGTH_SHORT).show()
+                        if (customer != null && customer.email.equals(customerEmail)) {
+                            val receivedIntent = intent
+                            val email = receivedIntent.getStringExtra("EMAIL_EXTRA")
+                            // Create instance of Update
+                            val updateID: String? = referenceDBUpdate.push().key
+                            val update = Update(updateID, customerEmail, email, message)
+                            // Add update to database
+                            referenceDBUpdate.child(updateID!!).setValue(update)
+                            //Message sent successfully
+                            Toast.makeText(this@AdminSendUpdates, "Message sent successfully", Toast.LENGTH_SHORT).show()
+                            //Start new activity
+                            var send = Intent(this@AdminSendUpdates, AdminHomePage::class.java)
+                            startActivity(send)
+                            break
+                            }
+                        else if (!customerExists) {
+                            // Customer does not exist
+                            Toast.makeText(this@AdminSendUpdates, "The customer you are trying to send an update to does not exist!", Toast.LENGTH_SHORT).show()
                         }
-                        else
-                            Toast.makeText(this@AdminSendUpdates, "No user exist", Toast.LENGTH_SHORT).show()
                     }
                 }
             }

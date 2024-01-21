@@ -9,6 +9,7 @@ import android.widget.TextView
 import androidx.cardview.widget.CardView
 import com.example.cafemobileapplication.Admin.AdminLogin
 import com.example.cafemobileapplication.Admin.AdminReviewFeedback
+import com.example.cafemobileapplication.Classes.LoggedInCustomerList
 import com.example.cafemobileapplication.R
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
@@ -31,7 +32,7 @@ class CustomerHomePage : AppCompatActivity() {
         //view menu
         c_browse_menu = findViewById(R.id.Customer_menu_card)
         c_browse_menu.setOnClickListener {
-            var send = Intent(this, CustomerMenu::class.java)
+            var send = Intent(this, CustomerBrowse::class.java)
             startActivity(send)
         }
 
@@ -52,7 +53,7 @@ class CustomerHomePage : AppCompatActivity() {
         // need to complete the confirmation slot
         c_confirm = findViewById(R.id.Customer_Confirmation_card)
         c_confirm.setOnClickListener{
-            var send = Intent(this, AdminReviewFeedback::class.java)
+            var send = Intent(this, CustomerConfirmation::class.java)
             startActivity(send)
 
         }
@@ -60,14 +61,14 @@ class CustomerHomePage : AppCompatActivity() {
         //write feedback
         c_write_feedback = findViewById(R.id.Customer_write_feedback_card)
         c_write_feedback.setOnClickListener {
-            var send = Intent(this, AdminReviewFeedback::class.java)
+            var send = Intent(this, CustomerFeedback::class.java)
             startActivity(send)
         }
 
         //logout
         c_logout = findViewById(R.id.Customer_logout_card)
         c_logout.setOnClickListener{
-            var send = Intent(this, AdminLogin::class.java)
+            val send = Intent(this, CustomerLogin::class.java)
             startActivity(send)
         }
 

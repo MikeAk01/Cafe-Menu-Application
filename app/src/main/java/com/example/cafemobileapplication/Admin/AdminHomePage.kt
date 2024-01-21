@@ -7,6 +7,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import androidx.cardview.widget.CardView
+import com.example.cafemobileapplication.Classes.LoggedInAdminList
 import com.example.cafemobileapplication.R
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
@@ -47,8 +48,12 @@ class AdminHomePage : AppCompatActivity() {
         //Send updates
         c_send_updates = findViewById(R.id.admin_send_updates_card)
         c_send_updates.setOnClickListener{
-            var send = Intent(this, AdminSendUpdates::class.java)
-            startActivity(send)
+            //Send the logged in email from the admin
+            val receivedIntent = intent
+            val email = receivedIntent.getStringExtra("EMAIL_EXTRA")
+            var intent = Intent(this, AdminSendUpdates::class.java)
+            intent.putExtra("EMAIL_EXTRA", email)
+            startActivity(intent)
         }
         //Review feedback
         c_review_feedback = findViewById(R.id.admin_review_feedback_card)

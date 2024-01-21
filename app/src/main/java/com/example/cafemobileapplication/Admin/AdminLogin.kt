@@ -9,6 +9,9 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
+import com.example.cafemobileapplication.Classes.LoggedInAdminList
+import com.example.cafemobileapplication.Classes.LoggedInCustomerList
+import com.example.cafemobileapplication.Customer.CustomerHomePage
 import com.example.cafemobileapplication.MainActivity
 import com.example.cafemobileapplication.R
 import com.google.firebase.database.DataSnapshot
@@ -25,6 +28,8 @@ class AdminLogin : AppCompatActivity() {
     lateinit var realtimeDB: FirebaseDatabase
     lateinit var referenceDB: DatabaseReference
     lateinit var backToMain_Button: Button
+    //Class to store the logged in admins
+    lateinit var loggedInAdminList: LoggedInAdminList
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -43,6 +48,9 @@ class AdminLogin : AppCompatActivity() {
             var send = Intent(this, MainActivity::class.java)
             startActivity(send)
         }
+
+        //Initialize LoggedCustomerList
+        loggedInAdminList = LoggedInAdminList()
 
         //Function to log in an admin
         adminLogin()
@@ -81,8 +89,14 @@ class AdminLogin : AppCompatActivity() {
                                     if (admin.password.equals(password)) {
                                         // Login successful
                                         Toast.makeText(this@AdminLogin, "Login successfully", Toast.LENGTH_SHORT).show()
-                                        var send = Intent(this@AdminLogin, AdminHomePage::class.java)
-                                        startActivity(send)
+                                        //Add the admin to the list of logged admins
+                                        if (!loggedInAdminList.getLoggedInAdmin().contains(email)) {
+                                            loggedInAdminList.addAdmin(email)
+                                        }
+                                        //Start new activity
+                                        var intent = Intent(this@AdminLogin, AdminHomePage::class.java)
+                                        intent.putExtra("EMAIL_EXTRA", email)
+                                        startActivity(intent)
 
                                     } else
                                         Toast.makeText(this@AdminLogin, "Login failed: credentials are wrong", Toast.LENGTH_SHORT).show()
@@ -101,16 +115,4 @@ class AdminLogin : AppCompatActivity() {
 
         }
     }
-
-    /**
-     * This function is used to check the database for the values in the paramenter.
-     * If the values are in the table the user can log in.
-     */
-    private fun signinAdmin(email: String, password: String) {
-
-    }
-
-
-
-
 }

@@ -7,6 +7,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
+import com.example.cafemobileapplication.Classes.LoggedInCustomerList
 import com.example.cafemobileapplication.MainActivity
 import com.example.cafemobileapplication.R
 import com.google.firebase.database.DataSnapshot
@@ -22,6 +23,8 @@ class CustomerLogin : AppCompatActivity() {
     lateinit var BM_Button: Button
     lateinit var realtimeDB: FirebaseDatabase
     lateinit var referenceDB: DatabaseReference
+    //NEW STUFF: Class to store the logged in customers
+    lateinit var loggedInCustomerList: LoggedInCustomerList
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,6 +41,10 @@ class CustomerLogin : AppCompatActivity() {
             startActivity(send)
 
         }
+
+        //NEW STUFF: Initialize LoggedCustomerList
+        loggedInCustomerList = LoggedInCustomerList()
+
         //NEW STUFF HERE
         //Set the back button to go to the main page
         BM_Button = findViewById(R.id.Customer_BacktoHome_Button)
@@ -95,22 +102,19 @@ class CustomerLogin : AppCompatActivity() {
                             // Check if the password matches
                             if (customer != null && customer.password == password) {
                                 // Login successful
-                                Toast.makeText(
-                                    this@CustomerLogin,
-                                    "Login successfully",
-                                    Toast.LENGTH_SHORT
-                                ).show()
-                                var send =
-                                    Intent(this@CustomerLogin, CustomerHomePage::class.java)
-                                startActivity(send)
+                                Toast.makeText(this@CustomerLogin, "Login successfully", Toast.LENGTH_SHORT).show()
+                                //NEW STUFF: Add the customer to the list of logged customers
+                                if (!loggedInCustomerList.getLoggedInCustomers().contains(email)) {
+                                    loggedInCustomerList.addCustomer(email)
+                                }
+                                //Start new activity
+                                var intent = Intent(this@CustomerLogin, CustomerHomePage::class.java)
+                                intent.putExtra("EMAIL_EXTRA", email)
+                                startActivity(intent)
                             }
                         }
                     } else
-                        Toast.makeText(
-                            this@CustomerLogin,
-                            "Login failed: credentials are wrong",
-                            Toast.LENGTH_SHORT
-                        ).show()
+                        Toast.makeText(this@CustomerLogin, "Login failed: credentials are wrong", Toast.LENGTH_SHORT).show()
                 }
 
                 override fun onCancelled(error: DatabaseError) {
